@@ -67,6 +67,15 @@ When THEME is given, the style used is obtained from `engrave-faces-get-theme'."
       preset-style
       "\n"))))
 
+(defun engrave-faces-latex--valid-hex-color-p (color)
+  "Return non-nil if COLOR is a valid 7-character hex color string like \"#F37021\".
+Reject malformed color values that produce broken LaTeX, e.g. from
+ESS color swatch faces applied to R hex color string literals."
+  (and (stringp color)
+       (= (length color) 7)
+       (eq (aref color 0) ?#)
+       (string-match-p "\\`#[0-9A-Fa-f]\\{6\\}\\'" color)))
+
 (defun engrave-faces-latex-gen-preamble-line (face style)
   "Generate a LaTeX preamble line for STYLE representing FACE."
   (let ((short (plist-get style         :slug))
@@ -75,19 +84,21 @@ When THEME is given, the style used is obtained from `engrave-faces-get-theme'."
         (st    (plist-get style         :strike-through))
         (it    (eql (plist-get style    :slant) 'italic))
         (bl    (member (plist-get style :weight) '(bold extra-bold))))
-    (concat (when fg (format "\\definecolor{EF%s}{HTML}{%s}\n" short (substring fg 1)))
-            (when bg (format "\\definecolor{Ef%s}{HTML}{%s}\n" short (substring bg 1)))
-            "\\newcommand{\\EF" short "}[1]{"
-            (when (and bg (not (eq face 'default)))
-              (concat "\\colorbox{Ef" short "}{\\efstrut{}"))
-            (when fg (concat "\\textcolor{EF" short "}{"))
-            (when st "\\sout{") (when bl "\\textbf{") (when it "\\textit{")
-            "#1}"
-            (make-string
-             (cl-count-if #'identity
-                          (list (and bg (not (eq face 'default))) fg st bl it))
-             ?})
-            " % " (symbol-name face))))
+    (let ((fg (and (engrave-faces-latex--valid-hex-color-p fg) fg))
+          (bg (and (engrave-faces-latex--valid-hex-color-p bg) bg)))
+      (concat (when fg (format "\\definecolor{EF%s}{HTML}{%s}\n" short (substring fg 1)))
+              (when bg (format "\\definecolor{Ef%s}{HTML}{%s}\n" short (substring bg 1)))
+              "\\newcommand{\\EF" short "}[1]{"
+              (when (and bg (not (eq face 'default)))
+                (concat "\\colorbox{Ef" short "}{\\efstrut{}"))
+              (when fg (concat "\\textcolor{EF" short "}{"))
+              (when st "\\sout{") (when bl "\\textbf{") (when it "\\textit{")
+              "#1}"
+              (make-string
+               (cl-count-if #'identity
+                            (list (and bg (not (eq face 'default))) fg st bl it))
+               ?})
+              " % " (symbol-name face)))))
 
 (defun engrave-faces-latex-face-apply (faces content)
   "Convert the parameters of FACES to a LaTeX command applied to CONTENT."
@@ -97,12 +108,17 @@ When THEME is given, the style used is obtained from `engrave-faces-get-theme'."
           (it (eql (plist-get attrs    :slant) 'italic))
           (bl (member (plist-get attrs :weight) '(bold extra-bold)))
           (st (plist-get attrs         :strike-through)))
-      (concat
-       (when bg (concat "\\colorbox[HTML]{" (substring bg 1) "}{"))
-       (when fg (concat "\\textcolor[HTML]{" (substring fg 1) "}{"))
-       (when st "\\sout{") (when bl "\\textbf{") (when it "\\textit{")
-       content
-       (when bg "}") (when fg "}") (when st "}") (when bl "}") (when it "}")))))
+      ;; Only use bg/fg if they are valid hex colors; skip malformed
+      ;; color values that can produce broken LaTeX (e.g. from ESS
+      ;; color swatch faces for R hex color string literals).
+      (let ((bg (and (engrave-faces-latex--valid-hex-color-p bg) bg))
+            (fg (and (engrave-faces-latex--valid-hex-color-p fg) fg)))
+        (concat
+         (when bg (concat "\\colorbox[HTML]{" (substring bg 1) "}{"))
+         (when fg (concat "\\textcolor[HTML]{" (substring fg 1) "}{"))
+         (when st "\\sout{") (when bl "\\textbf{") (when it "\\textit{")
+         content
+         (when bg "}") (when fg "}") (when st "}") (when bl "}") (when it "}"))))))
 
 (defconst engrave-faces-latex--char-replacements
   '(("\\\\" . "\\char92{}")
