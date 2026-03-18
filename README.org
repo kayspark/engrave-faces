@@ -25,3 +25,16 @@ I fully expect some important items to have been forgotten.
 - [X] LaTeX
 - [X] HTML
 - [X] ANSI
+
+* Fork changes
+
+Changes made in this fork relative to upstream [[https://github.com/tecosaur/engrave-faces][tecosaur/engrave-faces]]:
+
+- Hex color validation added to preset loading (upstream PR #22)
+- =nepes-dark= and =nepes-light= preset themes derived from the Nepes brand palette
+
+* Related
+
+- [[https://github.com/kayspark/nepes-palette][nepes-palette]] — single source of truth for all Nepes themes
+- [[https://github.com/kayspark/emacs-nepes][emacs-nepes]] — Emacs theme whose face values feed these presets
+- [[https://github.com/kayspark/nepes-latex-template][nepes-latex-template]] — LaTeX template that uses engrave-faces for code export
