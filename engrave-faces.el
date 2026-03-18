@@ -3,12 +3,12 @@
 ;; Copyright (C) 2021-2022 Free Software Foundation, Inc.
 
 ;; Author: TEC <https://git.tecosaur.net/>
-;; Maintainer: TEC <contact@tecosaur.net>
+;; Maintainer: kaypark <kayspark@gmail.com>
 ;; Created: January 18, 2021
-;; Modified: July 10, 2021
-;; Version: 0.3.1
+;; Modified: March 18, 2026
+;; Version: 0.4.0
 ;; Keywords: faces
-;; Homepage: https://github.com/tecosaur/engrave-faces
+;; Homepage: https://github.com/kayspark/engrave-faces
 ;; Package-Requires: ((emacs "27.1"))
 
 ;;; License:
@@ -135,12 +135,142 @@ buffer.  You may use them to modify the outlook of the final output."
        (ansi-color-magenta                  :short "ansi-magenta"        :slug "anm" :foreground "#CD00CD")
        (ansi-color-bright-yellow            :short "ansi-bright-yellow"  :slug "ANy" :foreground "#EEEE00")
        (ansi-color-bright-red               :short "ansi-bright-red"     :slug "ANr" :foreground "#EE0000")
-       (ansi-color-bright-black             :short "ansi-bright-black"   :slug "ANb" :foregroun  "#4D4D4D")
+       (ansi-color-bright-black             :short "ansi-bright-black"   :slug "ANb" :foreground"#4D4D4D")
        (ansi-color-bright-green             :short "ansi-bright-green"   :slug "ANg" :foreground "#00EE00")
        (ansi-color-bright-blue              :short "ansi-bright-blue"    :slug "ANB" :foreground "#0000FF")
        (ansi-color-bright-cyan              :short "ansi-bright-cyan"    :slug "ANc" :foreground "#00EEEE")
-       (ansi-color-bright-white             :short "ansi-bright-white"   :slug "ANw" :foregroun  "#FFFFFF")
-       (ansi-color-bright-magenta           :short "ansi-bright-magenta" :slug "ANm" :foregroun  "#EE00EE"))))
+       (ansi-color-bright-white             :short "ansi-bright-white"   :slug "ANw" :foreground"#FFFFFF")
+       (ansi-color-bright-magenta           :short "ansi-bright-magenta" :slug "ANm" :foreground"#EE00EE")))
+    (nepes-dark .
+      (;; faces.el
+       (default                             :short "default"             :slug "D"   :foreground "#DCD8D4" :background "#1E1C1A" :family "Monospace")
+       (variable-pitch                      :short "var-pitch"           :slug "vp"  :foreground "#DCD8D4"                       :family "Sans Serif")
+       (shadow                              :short "shadow"              :slug "h"   :foreground "#8A9199")
+       (success                             :short "success"             :slug "sc"  :foreground "#3DDC84" :weight bold)
+       (warning                             :short "warning"             :slug "w"   :foreground "#FEA413" :weight bold)
+       (error                               :short "error"               :slug "e"   :foreground "#FF5C5C" :weight bold)
+       (link                                :short "link"                :slug "l"   :foreground "#5C8CFF")
+       (link-visited                        :short "link"                :slug "lv"  :foreground "#A274C3")
+       (highlight                           :short "link"                :slug "hi"  :foreground "#5C8CFF")
+       ;; font-lock.el
+       (font-lock-comment-face              :short "fl-comment"          :slug "c"   :foreground "#8A9199")
+       (font-lock-comment-delimiter-face    :short "fl-comment-delim"    :slug "cd"  :foreground "#8A9199")
+       (font-lock-string-face               :short "fl-string"           :slug "s"   :foreground "#3DDC84")
+       (font-lock-doc-face                  :short "fl-doc"              :slug "d"   :foreground "#6BCF70")
+       (font-lock-doc-markup-face           :short "fl-doc-markup"       :slug "m"   :foreground "#6BCF70")
+       (font-lock-keyword-face              :short "fl-keyword"          :slug "k"   :foreground "#23438E")
+       (font-lock-builtin-face              :short "fl-builtin"          :slug "b"   :foreground "#6B8AD8")
+       (font-lock-function-name-face        :short "fl-function"         :slug "f"   :foreground "#3A9BA5")
+       (font-lock-variable-name-face        :short "fl-variable"         :slug "v"   :foreground "#DCD8D4")
+       (font-lock-type-face                 :short "fl-type"             :slug "t"   :foreground "#A274C3")
+       (font-lock-constant-face             :short "fl-constant"         :slug "o"   :foreground "#C9A63E")
+       (font-lock-warning-face              :short "fl-warning"          :slug "wr"  :foreground "#FF5C5C" :weight bold)
+       (font-lock-negation-char-face        :short "fl-neg-char"         :slug "nc")
+       (font-lock-preprocessor-face         :short "fl-preprocessor"     :slug "pp"  :foreground "#6B8AD8")
+       (font-lock-regexp-grouping-construct :short "fl-regexp"           :slug "rc"                        :weight bold)
+       (font-lock-regexp-grouping-backslash :short "fl-regexp-backslash" :slug "rb"                        :weight bold)
+       ;; org-faces.el
+       (org-block                           :short "org-block"           :slug "ob")
+       (org-block-begin-line                :short "org-block-begin"     :slug "obb")
+       (org-block-end-line                  :short "org-block-end"       :slug "obe")
+       ;; outlines (rainbow headings)
+       (outline-1                           :short "outline-1"           :slug "Oa"  :foreground "#5C8CFF" :weight bold)
+       (outline-2                           :short "outline-2"           :slug "Ob"  :foreground "#A274C3" :weight bold)
+       (outline-3                           :short "outline-3"           :slug "Oc"  :foreground "#3A9BA5" :weight bold)
+       (outline-4                           :short "outline-4"           :slug "Od"  :foreground "#3DDC84" :weight bold)
+       (outline-5                           :short "outline-5"           :slug "Oe"  :foreground "#E8C55A" :weight bold)
+       (outline-6                           :short "outline-6"           :slug "Of"  :foreground "#FF5C5C" :weight bold)
+       (outline-7                           :short "outline-7"           :slug "Og"  :foreground "#8A9199" :weight bold)
+       (outline-8                           :short "outline-8"           :slug "Oh"  :foreground "#6B8AD8" :weight bold)
+       ;; highlight-numbers.el
+       (highlight-numbers-number            :short "hl-number"           :slug "hn"  :foreground "#C9A63E")
+       ;; highlight-quoted.el
+       (highlight-quoted-quote              :short "hl-qquote"           :slug "hq"  :foreground "#23438E")
+       (highlight-quoted-symbol             :short "hl-qsymbol"          :slug "hs"  :foreground "#C9A63E")
+       ;; rainbow-delimiters.el
+       (rainbow-delimiters-depth-1-face     :short "rd-1"                :slug "rda" :foreground "#8A9199")
+       (rainbow-delimiters-depth-2-face     :short "rd-2"                :slug "rdb" :foreground "#5C8CFF")
+       (rainbow-delimiters-depth-3-face     :short "rd-3"                :slug "rdc" :foreground "#A274C3")
+       (rainbow-delimiters-depth-4-face     :short "rd-4"                :slug "rdd" :foreground "#3A9BA5")
+       (rainbow-delimiters-depth-5-face     :short "rd-5"                :slug "rde" :foreground "#3DDC84")
+       (rainbow-delimiters-depth-6-face     :short "rd-6"                :slug "rdf" :foreground "#E8C55A")
+       (rainbow-delimiters-depth-7-face     :short "rd-7"                :slug "rdg" :foreground "#FF5C5C")
+       (rainbow-delimiters-depth-8-face     :short "rd-8"                :slug "rdh" :foreground "#6B8AD8")
+       (rainbow-delimiters-depth-9-face     :short "rd-9"                :slug "rdi" :foreground "#FEA413")
+       ;; ansi-color
+       (ansi-color-black                    :short "ansi-black"          :slug "anb" :foreground "#1E1C1A")
+       (ansi-color-red                      :short "ansi-red"            :slug "anr" :foreground "#FF5C5C")
+       (ansi-color-green                    :short "ansi-green"          :slug "ang" :foreground "#3DDC84")
+       (ansi-color-yellow                   :short "ansi-yellow"         :slug "any" :foreground "#E8C55A")
+       (ansi-color-blue                     :short "ansi-blue"           :slug "anB" :foreground "#5C8CFF")
+       (ansi-color-magenta                  :short "ansi-magenta"        :slug "anm" :foreground "#A274C3")
+       (ansi-color-cyan                     :short "ansi-cyan"           :slug "anc" :foreground "#3A9BA5")
+       (ansi-color-white                    :short "ansi-white"          :slug "anw" :foreground "#DCD8D4")))
+    (nepes-light .
+      (;; faces.el
+       (default                             :short "default"             :slug "D"   :foreground "#1C1C1E" :background "#F8F8F8" :family "Monospace")
+       (variable-pitch                      :short "var-pitch"           :slug "vp"  :foreground "#1C1C1E"                       :family "Sans Serif")
+       (shadow                              :short "shadow"              :slug "h"   :foreground "#5A5A64")
+       (success                             :short "success"             :slug "sc"  :foreground "#2A8030" :weight bold)
+       (warning                             :short "warning"             :slug "w"   :foreground "#D08A10" :weight bold)
+       (error                               :short "error"               :slug "e"   :foreground "#C4181F" :weight bold)
+       (link                                :short "link"                :slug "l"   :foreground "#23438E")
+       (link-visited                        :short "link"                :slug "lv"  :foreground "#7A4FA0")
+       (highlight                           :short "link"                :slug "hi"  :foreground "#23438E")
+       ;; font-lock.el
+       (font-lock-comment-face              :short "fl-comment"          :slug "c"   :foreground "#5A5A64")
+       (font-lock-comment-delimiter-face    :short "fl-comment-delim"    :slug "cd"  :foreground "#5A5A64")
+       (font-lock-string-face               :short "fl-string"           :slug "s"   :foreground "#2A8030")
+       (font-lock-doc-face                  :short "fl-doc"              :slug "d"   :foreground "#43AD49")
+       (font-lock-doc-markup-face           :short "fl-doc-markup"       :slug "m"   :foreground "#43AD49")
+       (font-lock-keyword-face              :short "fl-keyword"          :slug "k"   :foreground "#23438E")
+       (font-lock-builtin-face              :short "fl-builtin"          :slug "b"   :foreground "#2E55B0")
+       (font-lock-function-name-face        :short "fl-function"         :slug "f"   :foreground "#2D7A82")
+       (font-lock-variable-name-face        :short "fl-variable"         :slug "v"   :foreground "#1C1C1E")
+       (font-lock-type-face                 :short "fl-type"             :slug "t"   :foreground "#7A4FA0")
+       (font-lock-constant-face             :short "fl-constant"         :slug "o"   :foreground "#7C6519")
+       (font-lock-warning-face              :short "fl-warning"          :slug "wr"  :foreground "#C4181F" :weight bold)
+       (font-lock-negation-char-face        :short "fl-neg-char"         :slug "nc")
+       (font-lock-preprocessor-face         :short "fl-preprocessor"     :slug "pp"  :foreground "#2E55B0")
+       (font-lock-regexp-grouping-construct :short "fl-regexp"           :slug "rc"                        :weight bold)
+       (font-lock-regexp-grouping-backslash :short "fl-regexp-backslash" :slug "rb"                        :weight bold)
+       ;; org-faces.el
+       (org-block                           :short "org-block"           :slug "ob")
+       (org-block-begin-line                :short "org-block-begin"     :slug "obb")
+       (org-block-end-line                  :short "org-block-end"       :slug "obe")
+       ;; outlines (rainbow headings)
+       (outline-1                           :short "outline-1"           :slug "Oa"  :foreground "#23438E" :weight bold)
+       (outline-2                           :short "outline-2"           :slug "Ob"  :foreground "#7A4FA0" :weight bold)
+       (outline-3                           :short "outline-3"           :slug "Oc"  :foreground "#2D7A82" :weight bold)
+       (outline-4                           :short "outline-4"           :slug "Od"  :foreground "#2A8030" :weight bold)
+       (outline-5                           :short "outline-5"           :slug "Oe"  :foreground "#866E1C" :weight bold)
+       (outline-6                           :short "outline-6"           :slug "Of"  :foreground "#C4181F" :weight bold)
+       (outline-7                           :short "outline-7"           :slug "Og"  :foreground "#5A5A64" :weight bold)
+       (outline-8                           :short "outline-8"           :slug "Oh"  :foreground "#2E55B0" :weight bold)
+       ;; highlight-numbers.el
+       (highlight-numbers-number            :short "hl-number"           :slug "hn"  :foreground "#7C6519")
+       ;; highlight-quoted.el
+       (highlight-quoted-quote              :short "hl-qquote"           :slug "hq"  :foreground "#23438E")
+       (highlight-quoted-symbol             :short "hl-qsymbol"          :slug "hs"  :foreground "#7C6519")
+       ;; rainbow-delimiters.el
+       (rainbow-delimiters-depth-1-face     :short "rd-1"                :slug "rda" :foreground "#5A5A64")
+       (rainbow-delimiters-depth-2-face     :short "rd-2"                :slug "rdb" :foreground "#23438E")
+       (rainbow-delimiters-depth-3-face     :short "rd-3"                :slug "rdc" :foreground "#7A4FA0")
+       (rainbow-delimiters-depth-4-face     :short "rd-4"                :slug "rdd" :foreground "#2D7A82")
+       (rainbow-delimiters-depth-5-face     :short "rd-5"                :slug "rde" :foreground "#2A8030")
+       (rainbow-delimiters-depth-6-face     :short "rd-6"                :slug "rdf" :foreground "#866E1C")
+       (rainbow-delimiters-depth-7-face     :short "rd-7"                :slug "rdg" :foreground "#C4181F")
+       (rainbow-delimiters-depth-8-face     :short "rd-8"                :slug "rdh" :foreground "#2E55B0")
+       (rainbow-delimiters-depth-9-face     :short "rd-9"                :slug "rdi" :foreground "#D08A10")
+       ;; ansi-color
+       (ansi-color-black                    :short "ansi-black"          :slug "anb" :foreground "#1C1C1E")
+       (ansi-color-red                      :short "ansi-red"            :slug "anr" :foreground "#C4181F")
+       (ansi-color-green                    :short "ansi-green"          :slug "ang" :foreground "#2A8030")
+       (ansi-color-yellow                   :short "ansi-yellow"         :slug "any" :foreground "#866E1C")
+       (ansi-color-blue                     :short "ansi-blue"           :slug "anB" :foreground "#23438E")
+       (ansi-color-magenta                  :short "ansi-magenta"        :slug "anm" :foreground "#7A4FA0")
+       (ansi-color-cyan                     :short "ansi-cyan"           :slug "anc" :foreground "#2D7A82")
+       (ansi-color-white                    :short "ansi-white"          :slug "anw" :foreground "#F8F8F8"))))
   "A collection of named style presets.
 
 This takes the form of an alist with theme names as the cars, with
